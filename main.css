@@ -1,0 +1,24 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+  }
+  body{
+    display:flex;
+    justify-content: center;
+    
+  }
+  .controls{
+    position: fixed;
+    bottom: 2rem;
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+  }
+  button{
+    padding:1rem;
+    width: 20vw;
+    height: 100vh;
+    opacity: 0.4;
+    border:none;
+    
+  }
