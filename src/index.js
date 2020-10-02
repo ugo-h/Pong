@@ -18,16 +18,18 @@ class Pong extends Game{
 
     this.scoreLeft = 0;
     this.scoreRight = 0;
+
+    this.objective = 5;
   };
 
   static onUpdate() {
     this.ball.draw(this.ctx);
     this.ball.update();
     this.scoreCheck(this.ball);
-    if(this.scoreLeft > 2) {
-      this.gameOver();
-    } else if(this.scoreRight > 2) {
-      this.gameOver();
+    if(this.scoreLeft >= this.objective) {
+      this.gameOver({title: 'YOU WON!'});
+    } else if(this.scoreRight >= this.objective) {
+      this.gameOver({title: 'GAME OVER!'});
     }
     this.playerPaddle.draw(this.ctx);
     this.playerPaddle.update(this.ball, this.aiPaddle);
@@ -67,14 +69,17 @@ class Pong extends Game{
       }
     };
 
-    static gameOver() {
+    static gameOver(msg) {
       this.run = false;
       this.isGameOver = true;
-      this.openGameOverMenu();
+      this.openGameOverMenu(msg);
     };
 
-    static openGameOverMenu() {
+    static openGameOverMenu(msg) {
       const menu = document.getElementById('menu-gameover');
+      const title = menu.querySelector('.menu__title');
+      title.textContent = msg.title;
+
       menu.classList.remove('invisible')
     };
 
@@ -92,7 +97,6 @@ class Pong extends Game{
       this.scoreRight = 0;
       this.playerPaddle.x = this.width/2;
       this.aiPaddle.x = this.width/2;
-      this.ball.x = this.height/3;
       this.isGameOver = false;
       this.run = true;
     }
