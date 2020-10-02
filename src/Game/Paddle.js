@@ -8,6 +8,7 @@ export class Paddle  extends Shape{
   constructor(y, maxVel, { isControlledByAi }) {
     super(WIDTH/2, y, 75, 10);
     this.ax = 0;
+    this.maxA = 0.9;
     this.maxVel = maxVel;
     this.isControlledByAi = !!isControlledByAi;
     paddles.push(this)

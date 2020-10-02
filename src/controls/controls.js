@@ -1,6 +1,3 @@
-
-
-
 export function attachMobileControls(player) {
     var ctrlLeft = document.getElementById('ctrl-left');
     var ctrlRight = document.getElementById('ctrl-right');
@@ -32,7 +29,6 @@ export function attachControls(player) {
           if(ev.code === 'KeyA') {
               player.ax = -player.maxA;
           } else if(ev.code === 'KeyD') {
-              console.log('move left')
               player.ax = player.maxA;
           } 
         })

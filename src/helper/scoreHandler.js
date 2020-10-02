@@ -9,7 +9,6 @@ export function scoreLeftHandler() {
 
 export function scoreRightHandler() {
     let score = parseInt(scoreRight.innerText);
-    console.log(score)
     score++;
     scoreRight.innerText = score;
 }

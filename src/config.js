@@ -6,6 +6,6 @@ export default {
     HEIGHT: window.innerHeight,
     PLAYABLE: true,
     BALL_SPEED: 2,
-    FPS: 60,
+    fps: 60,
     DEFAULT_COLOR: 'white'
 }
