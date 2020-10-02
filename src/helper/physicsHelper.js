@@ -1,7 +1,6 @@
 import config from "../config";
-import { scoreLeftHandler, scoreRightHandler } from './scoreHandler'
 
-const { WIDTH, HEIGHT, BALL_SPEED } = config;
+const { WIDTH } = config;
 
 export function checkBoundsX(obj) {
     if(obj.x > WIDTH-obj.width) {
@@ -10,23 +9,6 @@ export function checkBoundsX(obj) {
       obj.x = 0 + obj.width;
     }
   }
-  
-export function checkBoundsY(obj){
-if(obj.y > HEIGHT ) {
-    obj.x = WIDTH/2;
-    obj.y = HEIGHT/4;
-    obj.vy=BALL_SPEED;
-    obj.vx=0;
-    scoreRightHandler()
-    
-  } else if(obj.y < 0-obj.height*2 ){
-    obj.x = WIDTH/2;
-    obj.y = HEIGHT/1.2;
-    obj.vy=-BALL_SPEED;
-    obj.vx=0;
-    scoreLeftHandler();
-  }
-}
 
 
 

@@ -32,7 +32,6 @@ class Ball extends Shape{
     this.x += this.vx;
     
     this.checkBoundsX();
-    checkBoundsY(this);
     this.vx = Math.min(this.vx, this.maxVel);
     this.vy = Math.min(this.vy, this.maxVel)
     this.detectAllCollisions();

@@ -11,9 +11,9 @@
     <div id="score1">0</div>
     <div id="score2">0</div>
   </div>
-  <button id="ctrl-left">&lt;</button> 
+  <button id="ctrl-left" class="ctrl-btn">&lt;</button> 
   <canvas id="canv" class="canvas"></canvas> 
-  <button id="ctrl-right">&gt;</button> 
+  <button id="ctrl-right" class="ctrl-btn">&gt;</button> 
   <div class="menu-container" id="menu">
     <h1>PONG</h1>
     <ul class="menu" >
@@ -23,6 +23,10 @@
       <!-- <li class="menu__el"></li>
         <li class="menu__el"></li> -->
       </ul>
+    </div>
+    <div class="menu-gameover invisible" id="menu-gameover">
+      <h1 class="menu__title">GAME OVER</h1>
+      <button class="menu__el">RESTART</button>
     </div>
     <script src="./assets/index.js"></script>
 </body>

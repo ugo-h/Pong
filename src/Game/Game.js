@@ -7,10 +7,12 @@ export default class Game {
         this.fps = config.fps;
         this.height = config.HEIGHT;
         this.width = config.WIDTH;
+        this.ballSpeed = config.BALL_SPEED;
         this.userControllsPaddle = config.PLAYABLE;
         this.setupCanvas(canv);
         this.ctx = canv.getContext('2d');
         this.run = false;
+        this.isGameOver = false;
         
         this.initMenu();
         this.onCreate();
@@ -32,19 +34,10 @@ export default class Game {
             }
         };
     };
-   
-    static mobileControls() {
-
-    }
-
-    static controls() {
-
-    }
-
     static initMenu() {
         const menu = document.getElementById('menu');  
         document.addEventListener('keydown', ev => {
-          if(ev.code === 'Escape') {
+          if(ev.code === 'Escape' && !this.isGameOver) {
             this.run = !this.run;
             menu.classList.toggle('invisible')
           }
@@ -57,14 +50,6 @@ export default class Game {
             ev.currentTarget.classList.add('invisible');
           }
         })
-      }
-
-    static onCreate() {
-        
-    }
-
-    static onUpdate() {
-
     }
 
     static loop() {
@@ -77,5 +62,23 @@ export default class Game {
     static clearScreen() {
         this.ctx.fillStyle = 'black';
         this.ctx.fillRect(0, 0, this.width, this.height);
-      }
+    }
+   
+    static mobileControls() {
+
+    }
+
+    static controls() {
+
+    }
+
+
+    static onCreate() {
+        
+    }
+
+    static onUpdate() {
+
+    }
+
 }
