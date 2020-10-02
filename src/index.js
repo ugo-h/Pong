@@ -11,15 +11,31 @@ const POSITION_TOP = HEIGHT/6;
 
 let run = false;
 
-const menu = document.getElementById('menu');
-
 canv.height = HEIGHT;
 canv.width = WIDTH;
 const ctx = canv.getContext('2d');
 
 const ball = new Ball(WIDTH/2, HEIGHT/3, 10);
-const playerPaddle = new Paddle(POSITION_BOTTOM, 0.8, 8, { ai: !PLAYABLE })
-const aiPaddle = new Paddle(POSITION_TOP, 0.8, 7, { ai: true })
+const playerPaddle = new Paddle(POSITION_BOTTOM, 8, { isControlledByAi: !PLAYABLE })
+const aiPaddle = new Paddle(POSITION_TOP, 7, { isControlledByAi: true })
+
+function initMenu() {
+  const menu = document.getElementById('menu');  
+  document.addEventListener('keydown', ev => {
+    if(ev.code === 'Escape') {
+      run = !run;
+      menu.classList.toggle('invisible')
+    }
+  })
+  menu.addEventListener('click', ev => {
+    if(!ev.target.classList.contains('menu__el')) return;
+    if(ev.target.id === 'start') {
+      run = true;
+      console.log('run')
+      ev.currentTarget.classList.add('invisible');
+    }
+  })
+}
 
 function clearScreen() {
   ctx.fillStyle = 'black';
@@ -61,20 +77,6 @@ if(!isBrowserMobile()) {
   btns.forEach(btn => btn.style.display = 'none')
 }
 
-document.addEventListener('keydown', ev => {
-  if(ev.code === 'Escape') {
-    
-    run = !run;
-    menu.classList.toggle('invisible')
-  }
-})
-menu.addEventListener('click', ev => {
-  if(!ev.target.classList.contains('menu__el')) return;
-  if(ev.target.id === 'start') {
-    run = true;
-    console.log('run')
-    ev.currentTarget.classList.add('invisible');
-  }
-})
 
+initMenu();
 loop();

@@ -39,31 +39,43 @@ class Ball extends Shape{
   } 
   detectAllCollisions() {
     for(const paddle of paddles) {
-      if(isCollision(this, paddle)) {
-          if(this.py + this.height > paddle.y - paddle.height
-            ||this.py - this.height < paddle.y + paddle.height) {
-              this.handleCollisionY(paddle);
-          } else {
-            this.handleCollisionX(paddle);
-          }
-      } 
+      this.detectCollision(paddle);
     }
   };
 
+  detectCollision(other) {
+    if(isCollision(this, other)) {
+      if(this.isCollisionFront(other) || this.isCollisionBack(other)) {
+          this.handleCollisionY(other);
+      } else {
+        this.handleCollisionX(other);
+      }
+  } 
+  }
+
+  isCollisionFront(other) {
+    return this.py + this.height > other.y - other.height;
+  };
+
+  isCollisionBack(other) {
+    return this.py - this.height < other.y + other.height;
+  };
+
   handleCollisionX(other) {
-    this.x -= other.vx
-    // this.vx = 0;
+    this.x = this.px;
+
     this.vx = -this.vx*2;
     this.vy = -this.vy;
-  }
+  };
+
   handleCollisionY(other) {
     this.y = this.py;
-    // this.vy = 0;
+
     this.ay = - this.ay;
     this.vx = other.vx? other.vx*0.5: this.vx;
     this.vy = -this.vy;  
-  }
-}
+  };
+};
 
 
 export default Ball;
