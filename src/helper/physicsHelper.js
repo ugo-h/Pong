@@ -1,4 +1,5 @@
 import config from "../config";
+import { scoreLeftHandler, scoreRightHandler } from './scoreHandler'
 
 const { WIDTH, HEIGHT, BALL_SPEED } = config;
 
@@ -16,13 +17,15 @@ if(obj.y > HEIGHT ) {
     obj.y = HEIGHT/4;
     obj.vy=BALL_SPEED;
     obj.vx=0;
+    scoreRightHandler()
     
-} else if(obj.y < 0-obj.height*2 ){
+  } else if(obj.y < 0-obj.height*2 ){
     obj.x = WIDTH/2;
     obj.y = HEIGHT/1.2;
     obj.vy=-BALL_SPEED;
     obj.vx=0;
-}
+    scoreLeftHandler();
+  }
 }
 
 

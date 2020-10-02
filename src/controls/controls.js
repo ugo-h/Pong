@@ -1,3 +1,6 @@
+
+
+
 export function attachMobileControls(player) {
     var ctrlLeft = document.getElementById('ctrl-left');
     var ctrlRight = document.getElementById('ctrl-right');
@@ -26,13 +29,12 @@ export function attachMobileControls(player) {
   
 export function attachControls(player) {
       document.addEventListener('keydown', function(ev) {
-          // console.log(ev.code)
           if(ev.code === 'KeyA') {
               player.ax = -player.maxA;
           } else if(ev.code === 'KeyD') {
               console.log('move left')
               player.ax = player.maxA;
-          }
+          } 
         })
         document.addEventListener('keyup', function(ev) {
           if(ev.code === 'KeyA') {
@@ -42,6 +44,7 @@ export function attachControls(player) {
               player.vx = 0;
               player.ax = 0;
           }
+
         })
   }
   

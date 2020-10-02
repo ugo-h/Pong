@@ -1,6 +1,6 @@
 import Shape from '../Graphics/Shape';
 import config from '../config';
-var { WIDTH, HEIGHT} = config; 
+var { WIDTH, HEIGHT } = config; 
 
 export const paddles = [];
 
@@ -47,7 +47,7 @@ export function Paddle(y, maxA, maxVel, {ai}) {
         if(Math.max(target.y, this.y) - 30 <= Math.min(target.y, this.y)) {
           this.vx = this.x<opponent.x?this.maxVel:-this.maxVel;
         }
-       // this.ax = -this.ax*0.5
+      //  this.ax = -this.ax*0.5
         
       }
     }

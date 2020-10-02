@@ -7,11 +7,23 @@
   <title>Pong</title>
 </head>
 <body>
+  <div class="score">
+    <div id="score1">0</div>
+    <div id="score2">0</div>
+  </div>
   <button id="ctrl-left">&lt;</button> 
   <canvas id="canv" class="canvas"></canvas> 
   <button id="ctrl-right">&gt;</button> 
-  <div class="controls"> 
-  </div> 
-  <script src="./assets/index.js"></script>
+  <div class="menu-container" id="menu">
+    <h1>PONG</h1>
+    <ul class="menu" >
+      <li class="menu__el" id="start">
+        Start
+      </li>
+      <!-- <li class="menu__el"></li>
+        <li class="menu__el"></li> -->
+      </ul>
+    </div>
+    <script src="./assets/index.js"></script>
 </body>
 </html> 
