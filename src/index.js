@@ -4,6 +4,7 @@ import { Paddle } from './Game/Paddle';
 import Ball from './Game/Ball';
 import { attachControls, attachMobileControls } from './controls/controls';
 import { scoreLeftHandler, scoreRightHandler, setScoresToZero } from './Game/scoreHandler';
+import connectAi from './Game/aiHandler';
 
 class Pong extends Game{
   static onCreate() {
@@ -38,7 +39,8 @@ class Pong extends Game{
     this.playerPaddle.update(this.ball, this.aiPaddle);
     
     this.aiPaddle.draw(this.ctx);
-    this.aiPaddle.update(this.ball, this.playerPaddle);
+    this.aiPaddle.update();
+    connectAi(this.aiPaddle, this.ball, this.playerPaddle);
   }
   static hideMobileCOntrols() {    
     if(!isBrowserMobile()) {
