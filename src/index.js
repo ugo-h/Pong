@@ -12,9 +12,12 @@ class Pong extends Game{
     const POSITION_BOTTOM = this.height/1.125;
     const POSITION_TOP = this.height/6;    
 
+    const playerProperties = { velocity: 7, isControlledByAi: !this.userControllsPaddle };
+    const compProperties =  { velocity: 6, isControlledByAi: true };
+
     this.ball = new Ball(this.width/2, this.height/3, 10);
-    this.playerPaddle = new Paddle(POSITION_BOTTOM, 8, { isControlledByAi: !this.userControllsPaddle });
-    this.aiPaddle = new Paddle(POSITION_TOP, 7, { isControlledByAi: true });
+    this.playerPaddle = new Paddle(POSITION_BOTTOM, playerProperties);
+    this.aiPaddle = new Paddle(POSITION_TOP, compProperties);
 
     this.scoreLeft = 0;
     this.scoreRight = 0;
@@ -42,15 +45,15 @@ class Pong extends Game{
         const btns = document.querySelectorAll('button');
         btns.forEach(btn => btn.style.display = 'none')
     }  
-  }
+  };
+
   static controls() {
     attachControls(this.playerPaddle)
-
-  }
+  };
 
   static mobileControls() {
     attachMobileControls(this.playerPaddle);
-  }
+  };
 
   static scoreCheck(obj){
     if(obj.y > this.height) {
@@ -91,6 +94,7 @@ class Pong extends Game{
         this.restart();
       });
     };
+
     static restart() {
       setScoresToZero();
       this.scoreLeft = 0;
@@ -100,7 +104,7 @@ class Pong extends Game{
       this.isGameOver = false;
       this.run = true;
     }
-}
+};
 
 
 Pong.init(config);

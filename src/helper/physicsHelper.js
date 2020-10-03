@@ -10,8 +10,6 @@ export function checkBoundsX(obj) {
     }
   }
 
-
-
 export function isCollision(self, other) {
   return(
       self.x+self.width > other.x-other.width

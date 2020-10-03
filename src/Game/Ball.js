@@ -11,7 +11,7 @@ class Ball extends Shape{
       this.py = this.y;
       this.vy = BALL_SPEED;
       this.ay = 0.01;
-      this.maxVel = 5;
+      this.maxVel = 7;
   } 
 
   checkBoundsX() {

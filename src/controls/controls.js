@@ -36,9 +36,11 @@ export function attachControls(player) {
           if(ev.code === 'KeyA') {
               player.vx = 0;
               player.ax = 0;
+              
           } else if(ev.code === 'KeyD') {
               player.vx = 0;
               player.ax = 0;
+             
           }
 
         })
