@@ -2,10 +2,10 @@
 //HEIGHT: 400   
 
 export default {
-    WIDTH: 750,
+    WIDTH: window.innerWidth,
     HEIGHT: window.innerHeight,
     PLAYABLE: true,
-    BALL_SPEED: 2,
+    BALL_SPEED: 3,
     fps: 60,
     DEFAULT_COLOR: 'white'
 }

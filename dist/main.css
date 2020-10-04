@@ -8,13 +8,17 @@
 body{
   background: black;
   font-family: sans-serif;
-  display:flex;
-  justify-content: center;
+  /* display:flex;
+  justify-content: center; */
   
 }
 canvas{
-  border-left: 1rem solid white;
-  border-right: 1rem solid white;
+  z-index:2;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-left: 3px solid white;
+  border-right: 3px solid white;
 }
 .controls{
   position: fixed;
@@ -23,14 +27,23 @@ canvas{
   display:flex;
   justify-content: space-between;
 }
-.ctrl-btn{
+.ctrl-btn, .ctrl-btn--left, .ctrl-btn--right{
+  z-index:1;
   padding:1rem;
-  width: 20vw;
-  height: 100vh;
+  width: 30%;
+  height: 100%;
   opacity: 0.4;
   border:none;
+  position: fixed;
+}
+.ctrl-btn--left{
+left:0;
+}
+.ctrl-btn--right{
+right:0;
 }
 .menu-container, .menu-gameover{
+  z-index:200;
   text-align: center;
   color: white;
   position: fixed;
@@ -64,16 +77,27 @@ canvas{
 }
 
 .score{
-  position: absolute;
+  z-index: 1000;
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translate(-50%, 0);
   display: flex;
-  width: 700px;
+  width: 50%;
   justify-content: space-between;
   color:white;
   font-weight: 700;
   font-size: 2rem;
-  top:1rem;
 }
 
 .invisible{
   display:none;
+}
+
+@media (max-width: 500px){
+  .ctrl-btn, .ctrl-btn--left, .ctrl-btn--right{
+    width: 50%;
+    height: 30%;
+    bottom: 0;
+  }
 }

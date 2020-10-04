@@ -4,7 +4,7 @@ import { Paddle } from './Game/Paddle';
 import Ball from './Game/Ball';
 import { attachControls, attachMobileControls } from './controls/controls';
 import { scoreLeftHandler, scoreRightHandler, setScoresToZero } from './Game/scoreHandler';
-import connectAi from './Game/aiHandler';
+import Ai from './Game/aiHandler';
 
 class Pong extends Game{
   static onCreate() {
@@ -13,12 +13,13 @@ class Pong extends Game{
     const POSITION_BOTTOM = this.height/1.125;
     const POSITION_TOP = this.height/6;    
 
-    const playerProperties = { velocity: 7, isControlledByAi: !this.userControllsPaddle };
-    const compProperties =  { velocity: 6, isControlledByAi: true };
+    const playerProperties = { velocity: 7, size: this.width*0.12 };
+    const compProperties =  { velocity: 4, isControlledByAi: true, size: this.width*0.12 };
+    Ai.init(this.width, this.height);
 
-    this.ball = new Ball(this.width/2, this.height/3, 10);
-    this.playerPaddle = new Paddle(POSITION_BOTTOM, playerProperties);
-    this.aiPaddle = new Paddle(POSITION_TOP, compProperties);
+    this.ball = new Ball(this.width/2, this.height/3, this.width/60);
+    this.playerPaddle = new Paddle(this.width/2,  POSITION_BOTTOM, playerProperties);
+    this.aiPaddle = new Paddle(this.width/2, POSITION_TOP, compProperties);
 
     this.scoreLeft = 0;
     this.scoreRight = 0;
@@ -27,21 +28,31 @@ class Pong extends Game{
   };
 
   static onUpdate() {
+    this.checkForGameover();
+    this.scoreCheck(this.ball);
+    Ai.connectAi(this.aiPaddle, this.ball, this.playerPaddle);
+
     this.ball.draw(this.ctx);
     this.ball.update();
-    this.scoreCheck(this.ball);
+    this.ball.checkBoundsX(this.width);
+
+    this.playerPaddle.draw(this.ctx);
+    this.playerPaddle.update();
+    this.playerPaddle.checkBoundsX(this.width);
+
+    this.aiPaddle.draw(this.ctx);
+    this.aiPaddle.update();
+    this.aiPaddle.checkBoundsX(this.width);
+  };
+
+  static checkForGameover() {
     if(this.scoreLeft >= this.objective) {
       this.gameOver({title: 'YOU WON!'});
     } else if(this.scoreRight >= this.objective) {
       this.gameOver({title: 'GAME OVER!'});
     }
-    this.playerPaddle.draw(this.ctx);
-    this.playerPaddle.update(this.ball, this.aiPaddle);
-    
-    this.aiPaddle.draw(this.ctx);
-    this.aiPaddle.update();
-    connectAi(this.aiPaddle, this.ball, this.playerPaddle);
-  }
+  };
+
   static hideMobileCOntrols() {    
     if(!isBrowserMobile()) {
         const btns = document.querySelectorAll('button');
@@ -56,6 +67,7 @@ class Pong extends Game{
   static mobileControls() {
     attachMobileControls(this.playerPaddle);
   };
+
 
   static scoreCheck(obj){
     if(obj.y > this.height) {
@@ -101,6 +113,7 @@ class Pong extends Game{
       setScoresToZero();
       this.scoreLeft = 0;
       this.scoreRight = 0;
+      this.ball.vy = 1;
       this.playerPaddle.x = this.width/2;
       this.aiPaddle.x = this.width/2;
       this.isGameOver = false;

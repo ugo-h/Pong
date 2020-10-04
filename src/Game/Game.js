@@ -3,13 +3,12 @@ import isBrowserMobile from '../helper/detectmobilebrowser';
 export default class Game {
     static init(config) {
         const canv = document.getElementById('canv');
-
+        this.canv = canv;
         this.fps = config.fps;
-        this.height = config.HEIGHT;
-        this.width = config.WIDTH;
+        this.width = this.getWidth();
+        this.height = this.getHeight();
         this.ballSpeed = config.BALL_SPEED;
         this.userControllsPaddle = config.PLAYABLE;
-        this.setupCanvas(canv);
         this.ctx = canv.getContext('2d');
         this.run = false;
         this.isGameOver = false;
@@ -21,8 +20,8 @@ export default class Game {
     };
     
     static setupCanvas(canv) {
-        canv.height = this.height;
-        canv.width = this.width;
+      canv.width = this.width;
+      canv.height = this.height;
     }
 
     static attachControls() {
@@ -36,6 +35,11 @@ export default class Game {
     };
     static initMenu() {
         const menu = document.getElementById('menu');  
+        const gameScreen = document.getElementById('canv');
+        gameScreen.addEventListener('touchstart', () => {
+          this.run = !this.run;
+          menu.classList.toggle('invisible')
+        })
         document.addEventListener('keydown', ev => {
           if(ev.code === 'Escape' && !this.isGameOver) {
             this.run = !this.run;
@@ -46,7 +50,6 @@ export default class Game {
           if(!ev.target.classList.contains('menu__el')) return;
           if(ev.target.id === 'start') {
             this.run = true;
-            console.log(this.run)
             ev.currentTarget.classList.add('invisible');
           }
         })
@@ -54,6 +57,9 @@ export default class Game {
 
     static loop() {
         setTimeout(() => this.loop(), 1000/this.fps);
+        this.width = this.getWidth();
+        this.height = this.getHeight();
+        this.setupCanvas(this.canv)
         if(!this.run) return
         this.clearScreen();
         this.onUpdate();    
@@ -63,7 +69,25 @@ export default class Game {
         this.ctx.fillStyle = 'black';
         this.ctx.fillRect(0, 0, this.width, this.height);
     }
-   
+    
+    static getHeight() {
+      let height = window.visualViewport.height;
+      const width = window.visualViewport.width;
+      if(width < height) {
+        height*=0.7;
+      }
+      return height;
+    }
+    
+    static getWidth() {
+      let height = window.visualViewport.height;
+      let width = window.visualViewport.width;
+      if(width > height) {
+        height*=0.9;
+        return height
+      }
+      return height*0.7*0.9;
+    }
     static mobileControls() {
 
     }

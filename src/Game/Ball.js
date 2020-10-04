@@ -1,22 +1,22 @@
 import Shape from '../Graphics/Shape';
-import { isCollision, checkBoundsY, isCollisionX, isCollisionY } from '../helper/physicsHelper';
-import {paddles} from './Paddle';
+import { isCollision, isCollisionBack, isCollisionFront } from '../helper/collisions';
+import { paddles } from './Paddle';
 import config from '../config';
-var { WIDTH, BALL_SPEED } = config; 
+var { BALL_SPEED } = config; 
 
 class Ball extends Shape{
   constructor(x, y, radius) {
       super(x, y, radius, radius);
       this.px = this.x;
       this.py = this.y;
-      this.vy = BALL_SPEED;
+      this.vy = 1;
       this.ay = 0.01;
-      this.maxVel = 7;
+      this.maxVel = BALL_SPEED;
   } 
 
-  checkBoundsX() {
-    if(this.x > WIDTH-this.width) {
-      this.x = WIDTH-this.width;
+  checkBoundsX(width) {
+    if(this.x > width-this.width) {
+      this.x = width-this.width;
       this.vx *= -1;
     } else if(this.x < 0 + this.width) {
       this.x = 0 + this.width;
@@ -31,10 +31,9 @@ class Ball extends Shape{
     this.y += this.vy;
     this.x += this.vx;
     
-    this.checkBoundsX();
+    this.detectAllCollisions();
     this.vx = Math.min(this.vx, this.maxVel);
     this.vy = Math.min(this.vy, this.maxVel)
-    this.detectAllCollisions();
   } 
   detectAllCollisions() {
     for(const paddle of paddles) {
@@ -44,21 +43,13 @@ class Ball extends Shape{
 
   detectCollision(other) {
     if(isCollision(this, other)) {
-      if(this.isCollisionFront(other) || this.isCollisionBack(other)) {
+      if(isCollisionFront(this, other) || isCollisionBack(this, other)) {
           this.handleCollisionY(other);
       } else {
         this.handleCollisionX(other);
       }
   } 
   }
-
-  isCollisionFront(other) {
-    return this.py + this.height > other.y - other.height;
-  };
-
-  isCollisionBack(other) {
-    return this.py - this.height < other.y + other.height;
-  };
 
   handleCollisionX(other) {
     this.x = this.px;
