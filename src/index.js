@@ -2,7 +2,7 @@ import config from './config';
 import Game from './Game/Game';
 import { Paddle } from './Game/Paddle';
 import Ball from './Game/Ball';
-import { attachControls, attachMobileControls } from './controls/controls';
+import { attachControls, attachMobileControls, attachJoystick } from './controls/controls';
 import { scoreLeftHandler, scoreRightHandler, setScoresToZero } from './Game/scoreHandler';
 import Ai from './Game/aiHandler';
 
@@ -54,11 +54,11 @@ class Pong extends Game{
   };
 
   static controls() {
-    attachControls(this.playerPaddle)
+    attachControls(this.playerPaddle);
   };
-
+  
   static mobileControls() {
-    attachMobileControls(this.playerPaddle);
+    attachJoystick(this.playerPaddle);
   };
 
 

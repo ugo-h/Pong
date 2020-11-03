@@ -1,3 +1,29 @@
+import nipplejs from 'nipplejs';
+
+export function attachJoystick(player) {
+  const options = {
+    zone: document.getElementById('joystick'),
+    mode: 'static',
+    restJoystick: true,
+    color: '#666',
+    restOpacity: 1,
+    position: {top: '50%', left: '50%'},
+    lockX: true,
+    threshold: 1
+  }
+  const manager = nipplejs.create(options);
+  const joystic = manager[0];
+  manager.on('move plain', (ev) => {
+    const ax = joystic.frontPosition.x;
+    player.vx = ax/10;
+  })
+  manager.on('end', () => {
+    player.ax = 0;
+    player.vx = 0;
+  })
+
+}
+
 export function attachMobileControls(player) {
     var ctrlLeft = document.getElementById('ctrl-left');
     var ctrlRight = document.getElementById('ctrl-right');

@@ -27,13 +27,15 @@ export default class Game {
     static attachControls() {
         if(this.userControllsPaddle){
           this.mobileControls();
-          this.controls();                
+          if(!isBrowserMobile()) {
+            this.controls();                
+          }
         };
     };
     static initMenu() {
         const menu = document.getElementById('menu');  
-        const gameScreen = document.getElementById('canv');
-        gameScreen.addEventListener('touchstart', () => {
+        const startBtn = document.getElementById('btn-start');
+        startBtn.addEventListener('touchstart', () => {
           this.run = !this.run;
           menu.classList.toggle('invisible')
         })
