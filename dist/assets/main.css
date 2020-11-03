@@ -1,77 +1,164 @@
+:root{
+  --pad-offset: -8%;
+}
 *{
-    box-sizing: border-box;
-    margin:0;
-  }
-*:focus{
-  outline: none;
+  box-sizing: border-box;
 }
 body{
-  background: black;
   font-family: sans-serif;
-  /* display:flex;
-  justify-content: center; */
-  
+  margin:0;
+  padding:0;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }
-canvas{
-  z-index:2;
-  position: fixed;
+.container{
+  max-width: 400px;
+  margin:0;
+  padding:0;
+  width: 100%;
+  position: relative;
+  background-color:#b5b6e4;
+  height: 60vh;
+}
+.canvas, .screen-bg{
+  border-radius: 20px;
+  margin:0;
+  padding:0;
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, 0);
-  border-left: 3px solid white;
-  border-right: 3px solid white;
+  transform: translate(-50%, -50%);
+}
+.screen-bg{
+  background: #3e4943;
 }
 .controls{
-  position: fixed;
-  bottom: 2rem;
-  width:100%;
-  display:flex;
-  justify-content: space-between;
+  position: relative;
+  max-width: 400px;
+  margin:0;
+  padding:0;
+  background: #b5b6e4;
+  width: 100%;
+
+  height: 40vh;
 }
-.ctrl-btn, .ctrl-btn--left, .ctrl-btn--right{
-  z-index:1;
-  padding:1rem;
-  width: 30%;
+.controls__pads{
+  position: absolute;
+  left: 20%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.pads{
+  background: #ccc;
+  width: 25%;
+  height: 35%;
+  border-radius: 50%;
+}
+.pads__pad--left, .pads__pad--right, .pads__pad--top, .pads__pad--bottom{
+  position: absolute;
+  height: 50%;
+  width: 50%;
+  background: 	#908a99;
+}
+.pads__pad--left{
+  left:var(--pad-offset);
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.pads__pad--right{
+  right:var(--pad-offset);
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.pads__pad--top{
+  left: 50%;
+  top: var(--pad-offset);
+  transform: translate(-50%, 0);
+}
+.pads__pad--bottom{
+  left: 50%;
+  bottom: var(--pad-offset);
+  transform: translate(-50%, 0);
+}
+
+.controls__btns{
+  position: absolute;
+  right: 10%;
+  top: 40%;
+  transform: translate(50%, -50%);
+}
+.btns{
+  border-radius: 20px;
+  background: #ccc;
+  width: 25%;
+  height: 20%;
+  transform: rotate(-45deg);
+}
+.btns__btn--a, .btns__btn--b{
+  position: absolute;
   height: 100%;
-  opacity: 0.4;
-  border:none;
-  position: fixed;
+  width: 50%;
+  background:	#dd2020;
+  border-radius: 50%;
 }
-.ctrl-btn--left{
-left:0;
+.btns__btn--a{
+  left: var(--pad-offset)
 }
-.ctrl-btn--right{
-right:0;
+.btns__btn--b{
+  right: var(--pad-offset)
+}
+.controls__start-btn{
+  height: 20%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.start-btn{
+  font-size: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}   
+.start-btn__icon{
+  border-radius: 20px;
+  height: 8px;
+  width: 3rem;
+  background:#666;
 }
 .menu-container, .menu-gameover{
   z-index:200;
   text-align: center;
-  color: white;
+  color: #84d07d;
   position: fixed;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: none;
-  width: 50%;
+  width: 20%;
   height: 50%;
 }
 .menu__title{
-  color: white;
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  color: #84d07d;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 }
 
 .menu{
-  margin-top: 1rem;
   padding: 1rem;
   list-style: none;
   text-align: center;
 }
 .menu__el{
-  background: black;
-  font-size: 2rem;
+  background: 	transparent;
+  font-size: 1.2rem;
   margin: 1rem 0;
-  color: white;
-  border: 2px solid white;
+  color: #84d07d;
+  border: 2px solid #84d07d;
   padding: 1rem;
   cursor: pointer;
 }
@@ -79,25 +166,17 @@ right:0;
 .score{
   z-index: 1000;
   position: fixed;
-  top: 1rem;
+  top: 10%;
   left: 50%;
   transform: translate(-50%, 0);
   display: flex;
-  width: 30%;
+  width: 15%;
   justify-content: space-between;
-  color:white;
+  color:#84d07d;
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 1.2rem;
 }
 
 .invisible{
   display:none;
-}
-
-@media (max-width: 500px){
-  .ctrl-btn, .ctrl-btn--left, .ctrl-btn--right{
-    width: 50%;
-    height: 30%;
-    bottom: 0;
-  }
 }

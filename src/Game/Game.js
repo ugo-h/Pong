@@ -26,11 +26,8 @@ export default class Game {
 
     static attachControls() {
         if(this.userControllsPaddle){
-            if(isBrowserMobile()) {
-              this.mobileControls();
-            } else {
-              this.controls();
-            }
+          this.mobileControls();
+          this.controls();                
         };
     };
     static initMenu() {
@@ -66,7 +63,7 @@ export default class Game {
     }
 
     static clearScreen() {
-        this.ctx.fillStyle = 'black';
+        this.ctx.fillStyle = '#3e4943';
         this.ctx.fillRect(0, 0, this.width, this.height);
     }
     

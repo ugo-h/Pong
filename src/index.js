@@ -53,18 +53,7 @@ class Pong extends Game{
     }
   };
 
-  static hideMobileCOntrols() {    
-    if(!isBrowserMobile()) {
-        const btns = document.querySelectorAll('button');
-        btns.forEach(btn => btn.style.display = 'none')
-    }  
-  };
-
   static controls() {
-    var ctrlLeft = document.getElementById('ctrl-left');
-    var ctrlRight = document.getElementById('ctrl-right');
-    ctrlLeft.classList.add('invisible')
-    ctrlRight.classList.add('invisible')
     attachControls(this.playerPaddle)
   };
 

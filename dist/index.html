@@ -11,23 +11,43 @@
     <div id="score1">0</div>
     <div id="score2">0</div>
   </div>
-  <button id="ctrl-left" class="ctrl-btn--left">&lt;</button> 
-  <canvas id="canv" class="canvas"></canvas> 
-  <button id="ctrl-right" class="ctrl-btn--right">&gt;</button> 
-  <div class="menu-container" id="menu">
-    <h1>PONG</h1>
-    <ul class="menu" >
-      <li class="menu__el" id="start">
-        Start
-      </li>
-      <!-- <li class="menu__el"></li>
-        <li class="menu__el"></li> -->
-      </ul>
+
+  <div class="container">
+    <div class="menu-container" id="menu">
+      <h1>PONG</h1>
+      <ul class="menu" >
+        <li class="menu__el" id="start">
+          Start
+        </li>
+        </ul>
+      </div>
+      <div class="menu-gameover invisible" id="menu-gameover">
+        <h1 class="menu__title">GAME OVER</h1>
+        <button class="menu__el">RESTART</button>
+      </div>
+
+        <div class="screen-bg"></div>
+        <canvas height="128px" width="200px" id="canv" class="canvas"></canvas>
     </div>
-    <div class="menu-gameover invisible" id="menu-gameover">
-      <h1 class="menu__title">GAME OVER</h1>
-      <button class="menu__el">RESTART</button>
+    <div class="controls">
+        <div class="controls__pads pads">
+            <div id="ctrl-left" class="pads__pad--left"></div>
+            <div id="ctrl-right" class="pads__pad--right"></div>
+
+            <div class="pads__pad--top"></div>
+            <div class="pads__pad--bottom"></div>
+        </div>
+        <div class="controls__start-btn start-btn" id="btn-start">
+            <div class="start-btn__icon"></div>
+            <div class="start-btn__text">START</div>
+        </div>
+        <div class="controls__btns btns">
+            <div class="btns__btn--a"></div>
+            <div class="btns__btn--b"></div>
+        </div>
     </div>
+
+
     <script src="./assets/index.js"></script>
 </body>
 </html> 
