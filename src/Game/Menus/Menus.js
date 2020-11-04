@@ -1,9 +1,13 @@
 import Menu from './Menu';
 
-export function menuGameOver(msg, restartHandler) {
+export function createGameOverMenu(msg, restartHandler) {
     const options = [
-        {title: restart},
-        {action: restartHandler}
+        {
+            title: 'Restart',
+            action: restartHandler,
+            close: true
+        }
     ];
-    return new Menu('menu', msg, options);
+    const menu = new Menu('menu', msg, options);
+    menu.createMenu();
 }

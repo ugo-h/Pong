@@ -134,18 +134,18 @@ body{
   background: #ccc!important;
   opacity: 1!important;
 }
-.menu-container, .menu-gameover{
+.menu-container{
   z-index:200;
   text-align: center;
   color: #84d07d;
-  position: fixed;
+  position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: none;
-  width: 70%;
-  max-width: 300px;
-  height: 50%;
+  
+  width: 300px;
+  height: 300px;
 }
 .menu__title{
   color: #84d07d;
@@ -153,12 +153,19 @@ body{
   margin-bottom: 0.5rem;
 }
 
-.menu{
+.menu__items{
   padding: 1rem;
   list-style: none;
   text-align: center;
 }
-.menu__el{
+.menu{
+  height: 100%;
+  width:100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.menu__items__el{
   background: 	transparent;
   font-size: 1.2rem;
   margin: 1rem 0;

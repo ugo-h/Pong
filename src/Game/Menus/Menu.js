@@ -20,14 +20,24 @@ export default class Menu {
         this.options = options;
     }
     createMenu() {
+        const close = this.removeMenu.bind(this);
         const items = this.options.map(option => {
-            return createElement('li', {className:'menu__items__el', onClick: option.action}, option.content)
+            if(option.close) {
+                const action = option.action
+                option.action = function() {
+                    console.log('handler called')
+                    action();
+                    close();
+                };
+            };
+            return createElement('li', {className:'menu__items__el', onClick: option.action}, option.title)
         })
-        const container = document.getElementById(this.id);
+        console.log(items)
         const menu = createElement('div', {className:'menu'}, 
-            createElement('h2', {className:'menu__title'}, this.title),
-            createElement('ul', {className:'menu__items'}, ...items),
+        createElement('h2', {className:'menu__title'}, this.title),
+        createElement('ul', {className:'menu__items'}, ...items),
         );
+        const container = document.getElementById(this.id);
         container.append(menu)
     }
     removeMenu() {

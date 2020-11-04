@@ -5,7 +5,7 @@ import Ball from './Game/Ball';
 import { attachControls, attachJoystick } from './controls/controls';
 import { scoreLeftHandler, scoreRightHandler, setScoresToZero } from './Game/utils/scoreHandler';
 import Ai from './Game/utils/aiHandler';
-import { openGameOverMenu } from './Game/Menus/GameOver';
+import { createGameOverMenu } from './Game/Menus/Menus';
 
 class Pong extends Game{
   static onCreate() {
@@ -47,9 +47,9 @@ class Pong extends Game{
 
   static checkForGameover() {
     if(this.scoreLeft >= this.objective) {
-      this.gameOverHandler({title: 'YOU WON!'});
+      this.gameOverHandler('YOU WON!');
     } else if(this.scoreRight >= this.objective) {
-      this.gameOverHandler({title: 'GAME OVER!'});
+      this.gameOverHandler('GAME OVER!');
     }
   };
   static attachControls() {
@@ -77,7 +77,7 @@ class Pong extends Game{
     };
     static gameOverHandler(msg) {
       this.setGameToOver();
-      openGameOverMenu(msg, this.restart);
+      createGameOverMenu(msg, this.restart);
     };
 
     static restart() {
