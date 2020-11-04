@@ -1,12 +1,21 @@
 //WIDTH : 750,
-//HEIGHT: 400   
-
+//HEIGHT: 400
+import isBrowserMobile from './helper/detectmobilebrowser';
+const FPS = 40;
+const BALL_SPEED__MIN = 6;
+const BALL_SPEED__MAX = 6;
+const BALL_ACCELERATION = 0.1;
+const PADDLE_VEL = 16;
+const SCREEN_SIZE_MOD = isBrowserMobile()? 2: 1;
 export default {
     WIDTH: window.innerWidth,
     HEIGHT: window.innerHeight,
     PLAYABLE: true,
-    BALL_SPEED: 3,
-    fps: 60,
+    ballVelocity: (60/(FPS*SCREEN_SIZE_MOD))*BALL_SPEED__MAX,
+    ballVelocityMin: BALL_SPEED__MIN,
+    ballAcceleration: (60/FPS) *BALL_ACCELERATION,
+    paddleVelocity: (60/(FPS*SCREEN_SIZE_MOD))* PADDLE_VEL,
+    fps: FPS,
     DEFAULT_COLOR: '#84d07d',
     DEBUG_ON: false
 }

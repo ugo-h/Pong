@@ -2,16 +2,16 @@ import Shape from '../Graphics/Shape';
 import { isCollision, isCollisionBack, isCollisionFront } from '../helper/collisions';
 import { paddles } from './Paddle';
 import config from '../config';
-var { BALL_SPEED } = config; 
+var { ballVelocity, ballAcceleration, ballVelocityMin } = config; 
 
 class Ball extends Shape{
   constructor(x, y, radius) {
       super(x, y, radius, radius);
       this.px = this.x;
       this.py = this.y;
-      this.vy = 1;
-      this.ay = 0.01;
-      this.maxVel = BALL_SPEED;
+      this.vy = ballVelocityMin;
+      this.ay = ballAcceleration,
+      this.maxVel = ballVelocity;
   } 
 
   checkBoundsX(width) {
@@ -27,7 +27,7 @@ class Ball extends Shape{
     this.px = this.x;
     this.py = this.y;
   
-    this.vy += this.ay;
+    // this.vy += this.ay;
     this.y += this.vy;
     this.x += this.vx;
     
@@ -61,7 +61,7 @@ class Ball extends Shape{
   handleCollisionY(other) {
     this.y = this.py;
 
-    this.ay = - this.ay;
+    // this.ay = - this.ay;
     this.vx = other.vx? other.vx*0.5: this.vx;
     this.vy = -this.vy;  
   };

@@ -2,9 +2,9 @@ import config from './config';
 import Game from './Game/Game';
 import { Paddle } from './Game/Paddle';
 import Ball from './Game/Ball';
-import { attachControls, attachMobileControls, attachJoystick } from './controls/controls';
-import { scoreLeftHandler, scoreRightHandler, setScoresToZero } from './Game/scoreHandler';
-import Ai from './Game/aiHandler';
+import { attachControls, attachJoystick } from './controls/controls';
+import { scoreLeftHandler, scoreRightHandler, setScoresToZero } from './Game/utils/scoreHandler';
+import Ai from './Game/utils/aiHandler';
 
 class Pong extends Game{
   static onCreate() {
@@ -13,8 +13,8 @@ class Pong extends Game{
     const POSITION_BOTTOM = this.height/1.125;
     const POSITION_TOP = this.height/6;    
 
-    const playerProperties = { velocity: 7, size: this.width*0.12 };
-    const compProperties =  { velocity: 4, isControlledByAi: true, size: this.width*0.12 };
+    const playerProperties = { velocity: config.paddleVelocity, size: this.width*0.12 };
+    const compProperties =  { velocity: config.paddleVelocity/2.5, isControlledByAi: true, size: this.width*0.12 };
     Ai.init(this.width, this.height);
 
     this.ball = new Ball(this.width/2, this.height/3, this.width/60);
@@ -54,10 +54,12 @@ class Pong extends Game{
   };
 
   static controls() {
+    console.log('controls attached')
     attachControls(this.playerPaddle);
   };
   
   static mobileControls() {
+    console.log(' mobile controls attached')
     attachJoystick(this.playerPaddle);
   };
 
@@ -66,14 +68,16 @@ class Pong extends Game{
     if(obj.y > this.height) {
         obj.x = this.width/2;
         obj.y = this.height/4;
-        obj.vy = this.ballSpeed;
+        obj.vy = config.ballVelocity;
+
         obj.vx = 0;
         this.scoreRight = scoreRightHandler()
         
-      } else if(obj.y < 0-obj.height*2 ){
+    } else if(obj.y < 0-obj.height*2 ){
         obj.x = this.width/2;
         obj.y = this.height/1.2;
-        obj.vy =- this.ballSpeed;
+        obj.vy = -config.ballVelocity;
+
         obj.vx = 0;
         this.scoreLeft = scoreLeftHandler();
       }

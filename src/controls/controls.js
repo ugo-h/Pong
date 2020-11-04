@@ -1,4 +1,5 @@
 import nipplejs from 'nipplejs';
+import config from '../config';
 
 export function attachJoystick(player) {
   const options = {
@@ -15,7 +16,7 @@ export function attachJoystick(player) {
   const joystic = manager[0];
   manager.on('move plain', (ev) => {
     const ax = joystic.frontPosition.x;
-    player.vx = ax/10;
+    player.vx = ax*config.ballAcceleration;
   })
   manager.on('end', () => {
     player.ax = 0;

@@ -8,8 +8,7 @@ export default class Game {
       this.width = this.getWidth();
       this.height = this.getHeight();
       this.setupCanvas(this.canv)
-      this.ballSpeed = config.BALL_SPEED;
-      this.userControllsPaddle = config.PLAYABLE;
+
       this.ctx = canv.getContext('2d');
       this.run = false;
       this.isGameOver = false;

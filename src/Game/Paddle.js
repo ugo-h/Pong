@@ -6,8 +6,8 @@ export class Paddle  extends Shape{
   constructor(x, y, { velocity, size }) {
     super(x, y, size, size/7);
     this.ax = 0;
-    this.maxA = 0.8;
-    this.maxVel = velocity? velocity: 7;
+    this.maxA = 1.6;
+    this.maxVel = velocity? velocity: 14;
     paddles.push(this)
   };
   
