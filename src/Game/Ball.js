@@ -48,7 +48,7 @@ class Ball extends Shape{
       } else {
         this.handleCollisionX(other);
       }
-  } 
+   } 
   }
 
   handleCollisionX(other) {

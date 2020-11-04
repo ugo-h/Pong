@@ -1,103 +1,58 @@
-import isBrowserMobile from '../helper/detectmobilebrowser';
+import screen  from './Canvas/Canvas';
 
 export default class Game {
     static init(config) {
-      const canv = document.getElementById('canv');
-      this.canv = canv;
-      this.fps = config.fps;
-      this.width = this.getWidth();
-      this.height = this.getHeight();
-      this.setupCanvas(this.canv)
+        this.pauseHandler = this.pauseHandler.bind(this);
 
-      this.ctx = canv.getContext('2d');
-      this.run = false;
-      this.isGameOver = false;
-      this.initMenu();
-      this.onCreate();
-      this.attachControls();
-      this.loop();
+        const canvas = screen.getCanvas()
+        this.ctx = screen.getContext();
+
+        this.width = canvas.width;
+        this.height = canvas.height;
+
+        this.fps = config.fps;
+        this.run = true;
+        this.isGameOver = false;
+
+        this.onCreate();
+        this.attachControls();
+        this.startGame();
     };
-    
-    static setupCanvas(canv) {
-      canv.width = this.width;
-      canv.height = this.height;
-    }
+ 
+    static _loop() {
+        if(this.gameover){
+          return
+          };
+        setTimeout(() => this._loop(), 1000/this.fps);
 
-    static attachControls() {
-        if(this.userControllsPaddle){
-          this.mobileControls();
-          if(!isBrowserMobile()) {
-            this.controls();                
-          }
-        };
-    };
-    static initMenu() {
-        const menu = document.getElementById('menu');  
-        const startBtn = document.getElementById('btn-start');
-        startBtn.addEventListener('touchstart', () => {
-          this.run = !this.run;
-          menu.classList.toggle('invisible')
-        })
-        document.addEventListener('keydown', ev => {
-          if(ev.code === 'Escape' && !this.isGameOver) {
-            this.run = !this.run;
-            menu.classList.toggle('invisible')
-          }
-        })
-        menu.addEventListener('click', ev => {
-          if(!ev.target.classList.contains('menu__el')) return;
-          if(ev.target.id === 'start') {
-            this.run = true;
-            ev.currentTarget.classList.add('invisible');
-          }
-        })
-    }
-
-    static loop() {
-        setTimeout(() => this.loop(), 1000/this.fps);
-        if(!this.run) return
-        this.clearScreen();
+        if(!this.run) return;
+        screen.clear();
+        
         this.onUpdate();    
     }
-
-    static clearScreen() {
-        this.ctx.fillStyle = '#3e4943';
-        this.ctx.fillRect(0, 0, this.width, this.height);
-    }
     
-    static getHeight() {
-      let height = window.visualViewport.height;
-      const width = window.visualViewport.width;
-      if(width < height) {
-        height*=0.7;
-      }
-      return height;
-    }
-    
-    static getWidth() {
-      let height = window.visualViewport.height;
-      let width = window.visualViewport.width;
-      if(width > height) {
-        height*=0.9;
-        return height
-      }
-      return height*0.7*0.9;
-    }
-    static mobileControls() {
-
+    static startGame() {
+      this.gameover = false;
+      this.run = true;
+      this._loop();
     }
 
-    static controls() {
+    static pauseHandler() {
+      if(this.gameover) return;
 
+      this.ctx.font = "30px Arial";
+      this.ctx.fillStyle = '#84d07d';
+      this.ctx.fillText('Pause', this.width/2 -40, this.height/2);
+
+      this.run = !this.run;
+    }
+    static setGameToOver() {
+      this.gameover = true;
     }
 
+    static attachControls() {};
+      
+    static onCreate() {};
 
-    static onCreate() {
-        
-    }
-
-    static onUpdate() {
-
-    }
-
+    static onUpdate() {};
 }

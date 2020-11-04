@@ -26,6 +26,9 @@ export class Paddle  extends Shape{
       this.x = 0 + this.width;
     }
   };
+  returnToInitialPosition() {
+    this.x = this.intialPosition.x;
+  };
   
   
 };

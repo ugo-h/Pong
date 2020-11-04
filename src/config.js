@@ -1,7 +1,7 @@
 //WIDTH : 750,
 //HEIGHT: 400
 import isBrowserMobile from './helper/detectmobilebrowser';
-const FPS = 40;
+const FPS = isBrowserMobile()? 40: 60;
 const BALL_SPEED__MIN = 6;
 const BALL_SPEED__MAX = 6;
 const BALL_ACCELERATION = 0.1;
@@ -17,5 +17,6 @@ export default {
     paddleVelocity: (60/(FPS*SCREEN_SIZE_MOD))* PADDLE_VEL,
     fps: FPS,
     DEFAULT_COLOR: '#84d07d',
+    BG_COLOR: '#3e4943',
     DEBUG_ON: false
 }

@@ -46,13 +46,15 @@ export function attachMobileControls(player) {
     })
   }
   
-export function attachControls(player) {
+export function attachControls(player, PauseCallback) {
       document.addEventListener('keydown', function(ev) {
           if(ev.code === 'KeyA') {
               player.ax = -player.maxA;
           } else if(ev.code === 'KeyD') {
               player.ax = player.maxA;
-          } 
+          } else if(ev.code === 'Escape') {
+              PauseCallback();
+          }
         })
         document.addEventListener('keyup', function(ev) {
           if(ev.code === 'KeyA') {

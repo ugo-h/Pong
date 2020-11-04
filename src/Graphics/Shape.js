@@ -15,6 +15,7 @@ function Point2d(x, y){
     this.height = height*0.5;
     this.vy = 0;
     this.vx = 0;
+    this.intialPosition = {x, y};
   }
   
   Shape.prototype = {
@@ -26,6 +27,10 @@ function Point2d(x, y){
      );
      
      if(DEBUG_ON) this.showCenter(ctx);
+    },
+    returnToInitialPosition() {
+      this.x = this.intialPosition.x;
+      this.y = this.intialPosition.y;
     },
 
     update: function() {},
