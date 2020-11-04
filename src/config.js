@@ -1,7 +1,7 @@
 //WIDTH : 750,
 //HEIGHT: 400
 import isBrowserMobile from './helper/detectmobilebrowser';
-const FPS = isBrowserMobile()? 40: 60;
+const FPS = isBrowserMobile()? 40: 50;
 const BALL_SPEED__MIN = 6;
 const BALL_SPEED__MAX = 6;
 const BALL_ACCELERATION = 0.1;

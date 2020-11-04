@@ -1,28 +1,42 @@
-class Menu {
-    constructor() {
-
+export function createElement(type, props, ...children) {
+    const element = document.createElement(type.toUpperCase());
+    for(const key in props) {
+        if(key.includes('on') && props[key]!==null) {
+            const event = key.split('on')[1].toLowerCase();
+            element.addEventListener(event, props[key], false);
+            continue;
+        }
+        element[key] = props[key];
+    };
+    children.forEach(child => {
+        element.append(child);
+    });
+    return element;
+}
+export default class Menu {
+    constructor(id, title, options) {
+        this.id = id;
+        this.title = title;
+        this.options = options;
     }
-    static initMenu() {
-        const menu = document.getElementById('menu');  
-        const startBtn = document.getElementById('btn-start');
-        startBtn.addEventListener('touchstart', () => {
-            this.run = !this.run;
-            menu.classList.toggle('invisible')
+    createMenu() {
+        const items = this.options.map(option => {
+            return createElement('li', {className:'menu__items__el', onClick: option.action}, option.content)
         })
-        document.addEventListener('keydown', ev => {
-            if(ev.code === 'Escape' && !this.isGameOver) {
-              this.run = !this.run;
-              menu.classList.toggle('invisible')
-            }
-        })
-        menu.addEventListener('click', ev => {
-            if(!ev.target.classList.contains('menu__el')) return;
-            if(ev.target.id === 'start') {
-              this.run = true;
-              ev.currentTarget.classList.add('invisible');
-            }
-        })
+        const container = document.getElementById(this.id);
+        const menu = createElement('div', {className:'menu'}, 
+            createElement('h2', {className:'menu__title'}, this.title),
+            createElement('ul', {className:'menu__items'}, ...items),
+        );
+        container.append(menu)
+    }
+    removeMenu() {
+        const container = document.getElementById(this.id);
+        container.querySelectorAll('li').forEach((item, index) => {
+            item.removeEventListener('click', this.options[index].action, false)
+        });
+        container.innerHTML = '';
     }
 }
 
-export default Menu;
+
