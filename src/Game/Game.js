@@ -2,21 +2,21 @@ import isBrowserMobile from '../helper/detectmobilebrowser';
 
 export default class Game {
     static init(config) {
-        const canv = document.getElementById('canv');
-        this.canv = canv;
-        this.fps = config.fps;
-        this.width = this.getWidth();
-        this.height = this.getHeight();
-        this.ballSpeed = config.BALL_SPEED;
-        this.userControllsPaddle = config.PLAYABLE;
-        this.ctx = canv.getContext('2d');
-        this.run = false;
-        this.isGameOver = false;
-        
-        this.initMenu();
-        this.onCreate();
-        this.attachControls();
-        this.loop();
+      const canv = document.getElementById('canv');
+      this.canv = canv;
+      this.fps = config.fps;
+      this.width = this.getWidth();
+      this.height = this.getHeight();
+      this.setupCanvas(this.canv)
+      this.ballSpeed = config.BALL_SPEED;
+      this.userControllsPaddle = config.PLAYABLE;
+      this.ctx = canv.getContext('2d');
+      this.run = false;
+      this.isGameOver = false;
+      this.initMenu();
+      this.onCreate();
+      this.attachControls();
+      this.loop();
     };
     
     static setupCanvas(canv) {
@@ -56,9 +56,6 @@ export default class Game {
 
     static loop() {
         setTimeout(() => this.loop(), 1000/this.fps);
-        this.width = this.getWidth();
-        this.height = this.getHeight();
-        this.setupCanvas(this.canv)
         if(!this.run) return
         this.clearScreen();
         this.onUpdate();    

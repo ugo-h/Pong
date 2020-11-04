@@ -1,6 +1,6 @@
 import config from "../config";
 
-const { SHOW_CENTERS, DEFAULT_COLOR } = config;
+const { DEBUG_ON, DEFAULT_COLOR } = config;
 
 function Point2d(x, y){
     this.x = x;
@@ -24,15 +24,17 @@ function Point2d(x, y){
         this.x-this.width, this.y+this.height,
         this.width*2, -this.height*2
      );
-     if(SHOW_CENTERS){
-       ctx.fillStyle = 'red';
-       ctx.fillRect(
-        this.x-2.5, this.y-2.5, 5, 5
-        )
-      }
+     
+     if(DEBUG_ON) this.showCenter(ctx);
     },
-    update: function() {
-      
+
+    update: function() {},
+
+    showCenter(ctx) {
+      ctx.fillStyle = 'red';
+      ctx.fillRect(
+        this.x-2.5, this.y-2.5, 5, 5
+      )
     }
   };
   

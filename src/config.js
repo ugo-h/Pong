@@ -7,5 +7,6 @@ export default {
     PLAYABLE: true,
     BALL_SPEED: 3,
     fps: 60,
-    DEFAULT_COLOR: '#84d07d'
+    DEFAULT_COLOR: '#84d07d',
+    DEBUG_ON: false
 }
