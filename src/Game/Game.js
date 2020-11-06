@@ -26,7 +26,12 @@ export default class Game {
         if(!this.run) return;
         screen.clear();
         
-        this.onUpdate();    
+        try {
+          this.onUpdate();  
+        } catch(err)  {
+          this.gameover = true;
+          throw err;
+        }
     }
     
     static startGame() {
