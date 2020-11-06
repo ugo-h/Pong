@@ -10,7 +10,7 @@ class Ball extends Shape{
       this.px = this.x;
       this.py = this.y;
       this.vy = ballVelocityMin;
-      this.ay = ballAcceleration,
+      this.ay = 0.5,
       this.maxVel = ballVelocity;
   } 
 
@@ -27,7 +27,6 @@ class Ball extends Shape{
     this.px = this.x;
     this.py = this.y;
   
-    // this.vy += this.ay;
     this.y += this.vy;
     this.x += this.vx;
     
@@ -61,9 +60,9 @@ class Ball extends Shape{
   handleCollisionY(other) {
     this.y = this.py;
 
-    // this.ay = - this.ay;
-    this.vx = other.vx? other.vx*0.5: this.vx;
-    this.vy = -this.vy;  
+    this.ay = -this.ay;
+    this.vx = other.vx? other.vx*(0.1*this.vy): this.vx;
+    this.vy = -this.vy + this.ay;
   };
 };
 

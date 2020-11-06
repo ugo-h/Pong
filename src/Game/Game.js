@@ -15,8 +15,6 @@ export default class Game {
         this.isGameOver = false;
 
         this.onCreate();
-        this.attachControls();
-        this.startGame();
     };
  
     static _loop() {

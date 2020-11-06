@@ -5,6 +5,7 @@
   box-sizing: border-box;
 }
 body{
+  background:#66545e;
   font-family: sans-serif;
   margin:0;
   padding:0;
@@ -52,7 +53,9 @@ body{
   transform: translate(-50%, -50%);
 }
 .pads{
-  background: #ccc;
+  background: url('./svg/gamepad-cross-svgrepo-com.svg') no-repeat, #ccc;
+  background-size: contain;
+  background-position: center;
   width: 25%;
   height: 35%;
   border-radius: 50%;
@@ -130,6 +133,24 @@ body{
   width: 3rem;
   background:#666;
 }
+
+.ctrl-left, .ctrl-right{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background:#4f43ae;
+  border-radius: 50%;
+}
+.ctrl-right{
+  background: #dd2020;
+  bottom:0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 150%;
+  width: 120%;
+}
+
 .nipple .back{
   background: #ccc!important;
   opacity: 1!important;
@@ -139,7 +160,7 @@ body{
   text-align: center;
   color: #84d07d;
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: none;
@@ -150,15 +171,20 @@ body{
 .menu__title{
   color: #84d07d;
   font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0rem;
 }
 
 .menu__items{
-  padding: 1rem;
+  padding: 0;
   list-style: none;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
 }
 .menu{
+  justify-content: center;
   height: 100%;
   width:100%;
   display: flex;
@@ -168,11 +194,12 @@ body{
 .menu__items__el{
   background: 	transparent;
   font-size: 1.2rem;
-  margin: 1rem 0;
+  margin: 0.25rem 0;
   color: #84d07d;
   border: 2px solid #84d07d;
   padding: 1rem;
   cursor: pointer;
+  min-width: 150px;
 }
 
 .score{
@@ -195,5 +222,34 @@ body{
 @media(max-height: 500px) {
   .container{
     height: 100vh;
+  }
+}
+@media(min-height: 700px) {
+
+  .container{
+    position: relative;
+    margin-top:3rem;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    width: 360;
+    height: 375px;
+  }
+  .controls{
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 50px;
+    width: 360;
+    height: 250px;
+  }
+}
+@media(min-width: 900px) {
+
+  .container{
+    position: relative;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+  }
+  .controls{
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 50px;
   }
 }

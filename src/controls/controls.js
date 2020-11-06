@@ -1,7 +1,8 @@
 import nipplejs from 'nipplejs';
 import config from '../config';
+import { createMobileControls } from './createMobileControls';
 
-export function attachJoystick(player) {
+export function attachJoystick(player, pauseCallback) {
   const options = {
     zone: document.getElementById('joystick'),
     mode: 'static',
@@ -23,11 +24,16 @@ export function attachJoystick(player) {
     player.vx = 0;
   })
 
+  const ctrlStart = document.getElementById('btn-start');
+  ctrlStart.addEventListener('touchend', function() {
+    pauseCallback()
+  })
 }
 
-export function attachMobileControls(player) {
-    var ctrlLeft = document.getElementById('ctrl-left');
-    var ctrlRight = document.getElementById('ctrl-right');
+export function attachMobileControls(player, pauseCallback) {
+    const { ctrlLeft, ctrlRight } = createMobileControls();
+    const ctrlStart = document.getElementById('btn-start');
+
     ctrlLeft.addEventListener('touchstart', function(ev) {
       ev.preventDefault();
       player.ax = -player.maxA;
@@ -44,16 +50,19 @@ export function attachMobileControls(player) {
       player.vx = 0;
       player.ax = 0;
     })
+    ctrlStart.addEventListener('touchend', function() {
+      pauseCallback()
+    })
   }
   
-export function attachControls(player, PauseCallback) {
+export function attachControls(player, pauseCallback) {
       document.addEventListener('keydown', function(ev) {
           if(ev.code === 'KeyA') {
               player.ax = -player.maxA;
           } else if(ev.code === 'KeyD') {
               player.ax = player.maxA;
           } else if(ev.code === 'Escape') {
-              PauseCallback();
+              pauseCallback();
           }
         })
         document.addEventListener('keyup', function(ev) {
